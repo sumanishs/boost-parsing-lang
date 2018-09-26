@@ -17,6 +17,7 @@
 
 #include "tokens.hpp"
 #include "functors.hpp"
+#include "parse_tree_builder.hpp"
 
 using namespace boost::spirit;
 using namespace boost::phoenix;
@@ -28,8 +29,8 @@ struct lang_grammar
 {
 
     template <typename TokenDef>
-    lang_grammar(TokenDef const& tok)
-      : lang_grammar::base_type(start)
+    lang_grammar(TokenDef const& tok, ParseTreeBuilder* a_ptb)
+      : lang_grammar::base_type(start), m_ptb(a_ptb)
     {
         typedef void value_type;
 
@@ -43,11 +44,11 @@ struct lang_grammar
         var_decls   = int_decls      
                      | double_decls
                      ; 
-        int_decls   = int_decl_stmt_ >> tok.semicolon_;
-        int_decl_stmt_  = tok.int_ >> tok.identifier;
-
-        double_decls   = tok.double_  >> tok.identifier >> tok.semicolon_;
+        int_decls   = tok.int_ [PrintStr(m_ptb)] >> tok.identifier [PrintStr(m_ptb)] >> tok.semicolon_;
+        double_decls   = tok.double_ [PrintStr(m_ptb)] >> tok.identifier [PrintStr(m_ptb)] >> tok.semicolon_;
     }
     qi::rule<Iterator, qi::in_state_skipper<Lexer> > start, statements, var_decls, int_decls, double_decls;
-    qi::rule<Iterator, std::pair<std::string, std::string>(), qi::in_state_skipper<Lexer> >  int_decl_stmt_, double_decl_stmt_;
+
+
+    ParseTreeBuilder*   m_ptb;
 };

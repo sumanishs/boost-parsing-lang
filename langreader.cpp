@@ -27,8 +27,16 @@ LangReader::Read(std::string& filename){
     typedef lang_tokens::iterator_type iterator_type;
     typedef lang_grammar<iterator_type, lang_tokens::lexer_def> lang_grammar;
 
+    if(!m_des){
+        m_des = new Design();
+    }
+
+    if(!m_ptb){
+        m_ptb = new ParseTreeBuilder(m_des);
+    } 
+    
     lang_tokens tokens;                                 // Our lexer
-    lang_grammar grammar(tokens);                  // Our parser
+    lang_grammar grammar(tokens, m_ptb);                  // Our parser
 
     std::ifstream inFile;
     inFile.open(filename.c_str());

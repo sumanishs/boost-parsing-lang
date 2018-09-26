@@ -11,8 +11,8 @@ IPATHS=-I. -I../../Boost_1.68/boost_1_68_0
 CFLAGS=-g -w
 LPATHS=-L../../Boost_1.68/boost_1_68_0
 LFLAGS=
-DEPS=tokens.hpp grammar.hpp langreader.hpp functors.hpp 
-OBJS=langreader.o main.o
+DEPS=design.hpp parse_tree_builder.hpp tokens.hpp grammar.hpp langreader.hpp functors.hpp 
+OBJS=design.o parse_tree_builder.o langreader.o main.o
 
 %.o: %.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS) $(IPATHS) 

@@ -12,37 +12,34 @@
 
 #include <iostream>
 #include <utility>
-
-
-//namespace qi = boost::spirit::qi;
+#include "parse_tree_builder.hpp"
 
 typedef void value_type;
 struct PrintStr {
     void operator()(const std::string& str, qi::unused_type, qi::unused_type ) const{
-        std::cout << str;
+        //std::cout << str;
+        m_ptb -> PrintStr(str);
     }
-    PrintStr(){ }
+    PrintStr(ParseTreeBuilder* a_ptb):m_ptb(a_ptb) { }
+    ParseTreeBuilder* m_ptb;
 };
 
 struct PrintInt {
     void operator()(const int& i, qi::unused_type, qi::unused_type ) const{
-        std::cout << i;
+        //std::cout << i;
+        m_ptb -> PrintInt(i);
     }
-    PrintInt(){ }
+    PrintInt(ParseTreeBuilder* a_ptb):m_ptb(a_ptb) { }
+    ParseTreeBuilder* m_ptb;
 };
 
 struct PrintDouble {
     void operator()(const double& d, qi::unused_type, qi::unused_type ) const{
-        std::cout << d;
+        //std::cout << d;
+        m_ptb -> PrintDouble(d);
     }
-    PrintDouble(){ }
-};
-
-struct PrintPair {
-    void operator()(const std::pair<std::string, std::string>& p, qi::unused_type, qi::unused_type) const {
-        std::cout << p.first << " " << p.second;
-    }
-    PrintPair() {}
+    PrintDouble(ParseTreeBuilder* a_ptb):m_ptb(a_ptb) { }
+    ParseTreeBuilder* m_ptb;
 };
 #endif
 

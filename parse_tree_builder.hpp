@@ -6,24 +6,23 @@
 /* freely with this headed intact. Please don't delete this header.   */
 /**********************************************************************/ 
 
-#include <iostream>
-#include <string>
-
-#include "grammar.hpp"
+#ifndef __PARSE_TREE_BUILDER_HPP__
+#define __PARSE_TREE_BUILDER_HPP__
 #include "design.hpp"
-#include "parse_tree_builder.hpp"
 
 
-class LangReader {
+class ParseTreeBuilder {
 
     public:
-        LangReader():m_des(0), m_ptb(0) {}
-        ~LangReader() {}
-
-        bool Read(std::string& filename);
+        ParseTreeBuilder(Design* a_des);
+        ~ParseTreeBuilder();
+        void PrintStr(const std::string& str);
+        void PrintInt(const int& i);
+        void PrintDouble(const double& d);
 
     private:
-        Design* m_des;
-        ParseTreeBuilder* m_ptb;
-};
 
+        Design* m_des;
+
+};
+#endif

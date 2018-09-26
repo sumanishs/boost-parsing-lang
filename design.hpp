@@ -6,24 +6,22 @@
 /* freely with this headed intact. Please don't delete this header.   */
 /**********************************************************************/ 
 
+#ifndef __DESIGN_HPP__
+#define __DESIGN_HPP__
 #include <iostream>
 #include <string>
+#include <map>
+#include <utility>
 
-#include "grammar.hpp"
-#include "design.hpp"
-#include "parse_tree_builder.hpp"
-
-
-class LangReader {
+class Design {
 
     public:
-        LangReader():m_des(0), m_ptb(0) {}
-        ~LangReader() {}
-
-        bool Read(std::string& filename);
+        Design();
+        ~Design();
 
     private:
-        Design* m_des;
-        ParseTreeBuilder* m_ptb;
-};
+        std::map<std::string, int>  int_decl_list;
+        std::map<std::string, double>  double_decl_list;
 
+};
+#endif

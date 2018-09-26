@@ -1,2 +1,4 @@
 int i;
+int t = 14;
 double d;
+double y = 12.5;

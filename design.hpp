@@ -18,7 +18,7 @@ class Design {
     public:
         Design();
         ~Design();
-
+        
     private:
         std::map<std::string, int>  int_decl_list;
         std::map<std::string, double>  double_decl_list;

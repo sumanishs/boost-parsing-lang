@@ -30,6 +30,7 @@ enum token_ids
     ID_INT_T,
     ID_DOUBLE_T,
     ID_SEMICOLON_T,
+    ID_EQUAL_T,
 };
 
 template <typename Lexer>
@@ -45,10 +46,11 @@ struct lang_tokens : lex::lexer<Lexer>
         int_            = "int";
         double_         = "double";
         semicolon_      = "[;]";
+        equal_          = "[=]";
 
         //white_space     = "[ \\t]+";
 
-        this->self = lex::token_def<>('(') | ')' | '{' | '}' | '=' | ':' | '"' | '"' | ',';
+        this->self = lex::token_def<>('(') | ')' | '{' | '}' | ':' | '"' | '"' | ',';
 
         this->self.add
             (int_constant, ID_INT_CONSTANT)
@@ -58,6 +60,7 @@ struct lang_tokens : lex::lexer<Lexer>
             (int_,  ID_INT_T)
             (double_, ID_DOUBLE_T)
             (semicolon_, ID_SEMICOLON_T)
+            (equal_, ID_EQUAL_T)
             (identifier, ID_IDENTIFIER)
         ;
         //this-> self += white_space [lex::_pass = lex::pass_flags::pass_ignore]; // Need to tokenize but space not
@@ -75,7 +78,7 @@ struct lang_tokens : lex::lexer<Lexer>
     lex::token_def<double> double_constant;
     lex::token_def<std::string> int_, double_;
 
-    lex::token_def<std::string> semicolon_;
+    lex::token_def<std::string> semicolon_, equal_;
 
     //lex::token_def<lex::omit> white_space;
 };

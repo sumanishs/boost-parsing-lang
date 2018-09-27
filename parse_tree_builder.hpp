@@ -29,8 +29,9 @@ class ParseTreeBuilder {
         void PrintDouble(const double& d);
         void SetDeclID(const std::string& id);
         void SetDeclIVal(const int val);
-        void SetDeclDVal(const int val);
-        void SaveIntDecl(const std::string a_idecl);
+        void SetDeclDVal(const double val);
+        void SaveIntDecl();
+        void SaveDoubleDecl();
 
     private:
 

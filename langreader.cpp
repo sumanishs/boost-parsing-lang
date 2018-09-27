@@ -48,41 +48,30 @@ LangReader::Read(std::string& filename){
     std::stringstream strStream;
     strStream << inFile.rdbuf();
     std::string str(strStream.str());
-    //str.pop_back();
-    //std::cout << "File content:\n" << str << "!" << std::endl;
+    str.pop_back();
+    std::cout << "File content:\n" << str << std::endl;
     inFile.close();
 
     std::string::iterator it = str.begin();
     iterator_type iter = tokens.begin(it, str.end());
     iterator_type end = tokens.end();
 
-    //iterator_type itr = iter;
-    //while (itr != end && token_is_valid(*itr))
-    //{   
-    //    std::cout << "Token: " << itr->id() << ": " /*<< tokens.nameof(itr)*/ << " ('" << itr->value() << "')\n";
-    //    ++itr;
-    //}   
-    ////return 0;
-
-
     std::string ws("WS");
     bool r = qi::phrase_parse(iter, end, grammar, qi::in_state(ws)[tokens.self]);
 
     if (r && iter == end)
     {
-        std::cout << "\n-------------------------\n";
+        std::cout << "-------------------------\n";
         std::cout << "Parsing succeeded\n";
         std::cout << "-------------------------\n";
+        m_des -> DumpDesign();
         return true;
     }
     else
     {
-        std::cout << "\n-------------------------\n";
+        std::cout << "-------------------------\n";
         std::cout << "Parsing failed\n";
         std::cout << "-------------------------\n";
         return false;
     }
-
-    std::cout << "Bye... :-) \n\n";
-    return true;
 }

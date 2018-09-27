@@ -26,8 +26,26 @@ void ParseTreeBuilder::PrintDouble(const double& d) {
     std::cout << d;
 }
 
-void ParseTreeBuilder::SaveIntDecl(const std::string& a_idecl) {
-    last_decl_key = KEY_INT;
-    m_des
-    m_decl_stack.push(a_idecl);
+void ParseTreeBuilder::SetDeclID(const std::string& id) {
+    m_dcl_id = id;
+}
+
+void ParseTreeBuilder::SetDeclIVal(const int val) {
+    m_decl_ival = val;
+}
+
+void ParseTreeBuilder::SetDeclDVal(const double val) {
+    m_decl_dval = val;
+}
+
+void ParseTreeBuilder::SaveIntDecl() {
+    m_des -> SaveIntDecl (m_dcl_id, m_decl_ival);
+    m_dcl_id.clear();
+    m_decl_ival = 0;
+} 
+
+void ParseTreeBuilder::SaveDoubleDecl() {
+    m_des -> SaveDoubleDecl (m_dcl_id, m_decl_dval);
+    m_dcl_id.clear();
+    m_decl_dval = 0;
 } 

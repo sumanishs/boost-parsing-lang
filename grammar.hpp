@@ -44,11 +44,11 @@ struct lang_grammar
         var_decls   = int_decls      
                      | double_decls
                      ; 
-        int_decls   = tok.int_ [PrintStr(m_ptb)] >> tok.identifier [PrintStr(m_ptb)] >> -int_init_val >>  tok.semicolon_;
-        int_init_val = tok.equal_ >> tok.int_constant [PrintInt(m_ptb)];
+        int_decls   = tok.int_ >> tok.identifier [SetDeclID(m_ptb)] >> -int_init_val >>  tok.semicolon_ [SaveIntDecl(m_ptb)];
+        int_init_val = tok.equal_ >> tok.int_constant [SetDeclIVal(m_ptb)];
         
-        double_decls   = tok.double_ [PrintStr(m_ptb)] >> tok.identifier [PrintStr(m_ptb)] >> -double_init_val >> tok.semicolon_;
-        double_init_val = tok.equal_ >> tok.double_constant [PrintDouble(m_ptb)];
+        double_decls   = tok.double_ >> tok.identifier [SetDeclID(m_ptb)] >> -double_init_val >> tok.semicolon_ [SaveDoubleDecl(m_ptb)];
+        double_init_val = tok.equal_ >> tok.double_constant [SetDeclDVal(m_ptb)];
     }
     qi::rule<Iterator, qi::in_state_skipper<Lexer> > start, statements, var_decls, int_decls, double_decls, int_init_val, double_init_val;
 

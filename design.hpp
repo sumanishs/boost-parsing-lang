@@ -18,6 +18,11 @@ class Design {
     public:
         Design();
         ~Design();
+        void SaveIntDecl(const std::string id, const int val);
+        void SaveDoubleDecl(const std::string id, const double val);
+
+    public:
+        void DumpDesign();
         
     private:
         std::map<std::string, int>  int_decl_list;
